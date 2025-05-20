@@ -1,4 +1,4 @@
 # RunScope
 
-#h1 Download Git
+## Download Git
 https://git-scm.com/downloads/win
