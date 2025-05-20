@@ -1,2 +1,4 @@
 # RunScope
-App to create and track running programs
+
+#h1 Download Git
+https://git-scm.com/downloads/win
