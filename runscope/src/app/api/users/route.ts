@@ -22,9 +22,9 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
-  const { email, password, age, gender } = body
+  const { email, password, age } = body
 
-  if (!email || !password || !age || !gender) {
+  if (!email || !password || !age) {
     return NextResponse.json({ error: 'Données manquantes' }, { status: 400 })
   }
 
