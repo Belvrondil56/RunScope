@@ -2,8 +2,8 @@
 CREATE TABLE "User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "age" INTEGER,
-    "gender" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -17,15 +17,24 @@ CREATE TABLE "Program" (
 );
 
 -- CreateTable
+CREATE TABLE "Week" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "weekNumber" INTEGER NOT NULL,
+    "programId" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "Week_programId_fkey" FOREIGN KEY ("programId") REFERENCES "Program" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
 CREATE TABLE "Session" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "programId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "duration" INTEGER NOT NULL,
     "pace" TEXT NOT NULL,
     "distance" REAL NOT NULL,
+    "weekId" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "Session_programId_fkey" FOREIGN KEY ("programId") REFERENCES "Program" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Session_weekId_fkey" FOREIGN KEY ("weekId") REFERENCES "Week" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -63,3 +72,6 @@ CREATE TABLE "Record" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Week_programId_weekNumber_key" ON "Week"("programId", "weekNumber");
